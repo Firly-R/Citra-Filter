@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All-in-One Hand Tracking FX (Anime & FF Emote)</title>
+  
+  <style>
+    /* CSS Langsung Dikunci di Sini Agar Pasti Berjalan Sempurna */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Mematikan scrollbar secara total */
+      background-color: #000000; /* Latar belakang hitam pekat */
+    }
+
+    #v_src, #out {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: scaleX(-1); /* MEMBUAT KAMERA MENJADI CERMIN (MIRROR) */
+    }
+
+    #out {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .darkness {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 5, 0, 0.25);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .fx {
+      position: absolute;
+      height: auto;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      display: none;
+      mix-blend-mode: screen; 
+    }
+
+    /* Ukuran & Lapisan Layer Masing-masing Aset Video */
+    #n { width: 1600px; z-index: 20; }
+    #s { width: 2400px; z-index: 20; }
+    #cobra { width: 1500px; z-index: 10; } /* Di belakang badan/senjata */
+    #mp40 { width: 950px; z-index: 11; }   /* Tepat di depan dada */
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <video id="v_src" autoplay playsinline></video>
+  <canvas id="out"></canvas>
+  <div class="darkness"></div>
+
+  <video id="n" class="fx" src="assets/naruto.mp4" muted autoplay loop playsinline></video>
+  <video id="s" class="fx" src="assets/sasuke.mp4" muted autoplay loop playsinline></video>
+
+  <video id="cobra" class="fx" src="assets/cobra.mp4" muted autoplay loop playsinline></video>
+  <video id="mp40" class="fx" src="assets/mp40.mp4" muted autoplay loop playsinline></video>
+
+  <script src="script.js"></script>
+</body>
+</html>
